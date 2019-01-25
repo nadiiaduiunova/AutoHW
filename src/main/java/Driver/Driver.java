@@ -28,15 +28,16 @@ public class Driver {
         WebElement repository_name = driver.findElement(By.id("repository_name"));
         repository_name.click();
         repository_name.sendKeys("New1");
+        Thread.sleep(3000);
         // confirm creating a New1 repo
         driver.findElement(By.xpath("//*[@id=\"new_repository\"]/div[3]/button")).click();
+        Thread.sleep(3000);
         // make sure New1 exists
         new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#js-repo-pjax-container > div.pagehead.repohead.instapaper_ignore.readability-menu.experiment-repo-nav > div > h1 > strong > a")));
         // go to settings
-        driver.get("https://github.com/nadiiaduiunova/New1/settings");
-        //driver.findElement(By.cssSelector("#js-repo-pjax-container > div.pagehead.repohead.instapaper_ignore.readability-menu.experiment-repo-nav > div > h1 > strong > a")).click();
+        driver.findElement(By.cssSelector("#js-repo-pjax-container > div.pagehead.repohead.instapaper_ignore.readability-menu.experiment-repo-nav > nav > a:nth-child(7)")).click();
         // make sure we are at the Setting page
-       // new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#options_bucket > div:nth-child(1) > h2")));
+       new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#options_bucket > div:nth-child(1) > h2")));
         // find delete button
         driver.findElement(By.cssSelector("#options_bucket > div.Box.Box--danger > ul > li:nth-child(4) > details > summary")).click();
         //put a name od repo to be deleted
@@ -45,11 +46,10 @@ public class Driver {
         delete_repo_name.sendKeys("New1");
         driver.findElement(By.cssSelector("#options_bucket > div.Box.Box--danger > ul > li:nth-child(4) > details > details-dialog > div.Box-body.overflow-auto > form > button")).click();
         new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#js-flash-container > div > div")));
-        //Thread.sleep(3000);
-        //driver.get("https://github.com/new");
-        Thread.sleep(10000);
+        Thread.sleep(3000);
 
         driver.close();
         driver.quit();
+        System.out.println("SUCCESS!");
     }
 }
